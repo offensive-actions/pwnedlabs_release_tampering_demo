@@ -12,7 +12,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@a70053709ad859e4611b228778656fa2f2712658
       - name: Create release
         run: gh release create --repo ${{ github.repository }} ${{ github.ref_name }} original.txt
         env:
