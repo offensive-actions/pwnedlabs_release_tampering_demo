@@ -1,0 +1,19 @@
+name: Alter release
+
+on:
+  push
+
+jobs:
+  alter_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Alter release
+        shell: bash
+        run: |
+          echo "This has been changed after the release from another GH Action run, because the release was mutable." > original.txt
+          until gh release delete-asset v1 original.txt -y --repo offensive-actions/pwnedlabs-release-tampering-demo; do sleep 2; done
+          gh release upload v1 original.txt --repo offensive-actions/pwnedlabs-release-tampering-demo
+        env:
+          GH_TOKEN: ${{ github.token }}
